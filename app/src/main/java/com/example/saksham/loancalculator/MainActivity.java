@@ -2,29 +2,32 @@ package com.example.saksham.loancalculator;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
     EditText principal_input,rate_input,year_input,month_input;
-
+    Button b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        principal_input = (EditText)findViewById(R.id.editText);
-        rate_input = (EditText)findViewById(R.id.editText2);
-        year_input = (EditText)findViewById(R.id.editText3);
-        month_input = (EditText)findViewById(R.id.editText4);
-    }
+        principal_input = (EditText) findViewById(R.id.editText);
+        rate_input = (EditText) findViewById(R.id.editText2);
+        year_input = (EditText) findViewById(R.id.editText3);
+        month_input = (EditText) findViewById(R.id.editText4);
+        b = (Button) findViewById(R.id.button2);
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,7 +79,7 @@ public class MainActivity extends Activity {
             catch (Exception e) {
                 M = 0;
             }
-            if ((Y*12) != (int)(Y*12)) {
+            if ((Y*12) != (long)(Y*12)) {
                 t.setText("Tenure needs to be in multiples of 1 month");
             }
             else {
@@ -92,7 +95,7 @@ public class MainActivity extends Activity {
                     double amount = E * n;
                     double ip = amount - P;
                     interest.setText("Total Interest Payable = " + ip);
-                    total.setText("Total Payment = " + amount);
+                    total.setText("Total Payment = " + amount + "\n\n");
                 }
             }
 
@@ -111,4 +114,10 @@ public class MainActivity extends Activity {
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
+
+
+    public void change(View view) {
+        startActivity(new Intent(getApplicationContext(),Activity_info.class));
+    }
 }
+
